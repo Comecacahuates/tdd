@@ -1,10 +1,11 @@
-export function add(numbers: string): number {
+export function add(numbersString: string): number {
   let result: number;
 
-  if (numbers === '') {
+  if (numbersString === '') {
     result = 0;
   } else {
-    result = Number(numbers);
+    const numbers = numbersString.split(',').map(Number);
+    result = numbers.reduce((sum, number) => sum + number);
   }
 
   return result;

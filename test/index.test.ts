@@ -9,4 +9,8 @@ describe('add', () => {
   it('should return the same number for string with single number', () => {
     expect(add('2')).toBe(2);
   });
+
+  it('should return the sum of two numbers', () => {
+    expect(add('2,3')).toBe(5);
+  });
 });
