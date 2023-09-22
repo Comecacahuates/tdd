@@ -1,3 +1,11 @@
 export function add(numbers: string): number {
-  return 0;
+  let result: number;
+
+  if (numbers === '') {
+    result = 0;
+  } else {
+    result = Number(numbers);
+  }
+
+  return result;
 }
