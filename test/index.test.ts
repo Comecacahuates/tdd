@@ -13,4 +13,8 @@ describe('add', () => {
   it('should return the sum of two numbers', () => {
     expect(add('2,3')).toBe(5);
   });
+
+  it('should handle new line as delimiter', () => {
+    expect(add('1\n2,3')).toBe(6);
+  });
 });
