@@ -1,27 +1,26 @@
 export function parseInputString(inputString: string) {
   let delimiter: string | RegExp = /,|\n/;
   let numbersString = inputString;
+  const hasCustomDelimiter = inputString.startsWith('//');
 
-  if (inputString.startsWith('//')) {
-    const lines = inputString.split('\n');
-    delimiter = lines[0]!.substring(2);
-    numbersString = lines[1]!;
+  if (hasCustomDelimiter) {
+    const inputStringLines = inputString.split('\n');
+    const [delimiterLine, numbersStringLine] = inputStringLines;
+
+    delimiter = delimiterLine!.replace('//', '');
+    numbersString = numbersStringLine!;
   }
 
   return { delimiter, numbersString };
 }
 
 export function add(inputString: string): number {
-  let result: number;
-
+  let sum = 0;
   const { delimiter, numbersString } = parseInputString(inputString);
 
-  if (numbersString === '') {
-    result = 0;
-  } else {
-    const numbers = numbersString.split(delimiter).map(Number);
-    result = numbers.reduce((sum, number) => sum + number);
-  }
+  const numbersAsString = numbersString.split(delimiter);
+  const numbers = numbersAsString.map(Number);
+  sum = numbers.reduce((sum, number) => sum + number, 0);
 
-  return result;
+  return sum;
 }
