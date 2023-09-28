@@ -8,7 +8,7 @@ export function parseInputString(inputString: string) {
     const [delimiterLine, numbersStringLine] = inputStringLines;
 
     delimiter = delimiterLine!.replace('//', '');
-    numbersString = numbersStringLine!;
+    numbersString = numbersStringLine || '';
   }
 
   return { delimiter, numbersString };
