@@ -1,4 +1,7 @@
-export function parseInputString(inputString: string) {
+export function parseInputString(inputString: string): {
+  delimiter: string | RegExp;
+  numbersString: string;
+} {
   let delimiter: string | RegExp = /,|\n/;
   let numbersString = inputString;
   const hasCustomDelimiter = inputString.startsWith('//');
@@ -15,12 +18,11 @@ export function parseInputString(inputString: string) {
 }
 
 export function add(inputString: string): number {
-  let sum = 0;
   const { delimiter, numbersString } = parseInputString(inputString);
 
   const numbersAsString = numbersString.split(delimiter);
   const numbers = numbersAsString.map(Number);
-  sum = numbers.reduce((sum, number) => sum + number, 0);
+  const sum = numbers.reduce((sum, number) => sum + number, 0);
 
   return sum;
 }
