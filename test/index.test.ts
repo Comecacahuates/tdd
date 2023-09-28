@@ -17,4 +17,8 @@ describe('add', () => {
   it('should handle new line as delimiter', () => {
     expect(add('1\n2,3')).toBe(6);
   });
+
+  it('should handle custom delimiter', () => {
+    expect(add('//;\n1;2')).toBe(3);
+  });
 });
