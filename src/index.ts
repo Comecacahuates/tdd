@@ -22,6 +22,12 @@ export function add(inputString: string): number {
 
   const numbersAsString = numbersString.split(delimiter);
   const numbers = numbersAsString.map(Number);
+
+  const thereAreNegativeNumbers = numbers.some((number) => number < 0);
+  if (thereAreNegativeNumbers) {
+    throw new Error('Negative numbers are not allowed');
+  }
+
   const sum = numbers.reduce((sum, number) => sum + number, 0);
 
   return sum;
