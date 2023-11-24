@@ -1,3 +1,13 @@
+export interface Display {
+  show: (message: string) => void;
+}
+
+export function formatSum(operands: number[], result: number): string {
+  const operandsString = operands.join(' + ');
+
+  return `${operandsString} = ${result}`;
+}
+
 export function parseInputString(inputString: string): {
   delimiter: string | RegExp;
   numbersString: string;
@@ -17,7 +27,7 @@ export function parseInputString(inputString: string): {
   return { delimiter, numbersString };
 }
 
-export function add(inputString: string): number {
+export function add(inputString: string, display?: Display): number {
   const { delimiter, numbersString } = parseInputString(inputString);
 
   const numbersAsString = numbersString.split(delimiter);
@@ -29,6 +39,10 @@ export function add(inputString: string): number {
   }
 
   const sum = numbers.reduce((sum, number) => sum + number, 0);
+
+  const formattedSum = formatSum(numbers, sum);
+
+  display?.show(formattedSum);
 
   return sum;
 }
