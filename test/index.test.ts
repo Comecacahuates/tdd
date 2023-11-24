@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect, jest } from '@jest/globals';
 import { add, parseInputString } from '../src/index';
 
 describe('add', () => {
@@ -59,10 +59,24 @@ describe('add', () => {
     expect(add('//;\n1;2')).toBe(3);
   });
 
-  it.each([['1,-2'], ['1,-2,-3']])(
-    'should throw error if input string has negative numbers: %s',
-    (inputString: string) => {
-      expect(() => add(inputString)).toThrow(Error);
-    },
-  );
+  describe('Handling negative numbers', () => {
+    it.each([['1,-2'], ['1,-2,-3']])(
+      'should throw error if input string has negative numbers: %s',
+      (inputString: string) => {
+        expect(() => add(inputString)).toThrow(Error);
+      },
+    );
+  });
+
+  describe('Displaying input numbers and result', () => {
+    it('should display formatted input numbers and result', () => {
+      const mockDisplay = {
+        show: jest.fn(),
+      };
+
+      add('1,2', mockDisplay);
+
+      expect(mockDisplay.show).toHaveBeenCalledWith('1 + 2 = 3');
+    });
+  });
 });
