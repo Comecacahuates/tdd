@@ -58,4 +58,11 @@ describe('add', () => {
   it('should handle custom delimiter', () => {
     expect(add('//;\n1;2')).toBe(3);
   });
+
+  it.each([['1,-2'], ['1,-2,-3']])(
+    'should throw error if input string has negative numbers: %s',
+    (inputString: string) => {
+      expect(() => add(inputString)).toThrow(Error);
+    },
+  );
 });
